@@ -1,0 +1,25 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+
+<div class="card shadow">
+    <div class="card-body text-center">
+
+        <h4 class="text-danger mb-4">
+            Are you sure you want to delete "{{ student.name }}"?
+        </h4>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">
+                Yes, Delete
+            </button>
+            <a href="{% url 'student_list' %}" class="btn btn-secondary">
+                Cancel
+            </a>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

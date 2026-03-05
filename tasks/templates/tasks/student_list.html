@@ -1,0 +1,56 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between mb-3">
+    <h2>Student List</h2>
+    <a href="{% url 'student_create' %}" class="btn btn-success">
+        + Add Student
+    </a>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <form method="GET" class="d-flex mb-3">
+            <input type="text" name="q" class="form-control me-2" 
+                placeholder="Search by name, roll no or course">
+            <button class="btn btn-outline-primary">Search</button>
+        </form>
+        <table class="table table-bordered table-hover text-center">
+            <thead class="table-primary">
+                <tr>
+                    <th>Name</th>
+                    <th>Roll No</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.roll_number }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.course }}</td>
+                    <td>
+                        <a href="{% url 'student_update' student.pk %}" 
+                           class="btn btn-warning btn-sm">Edit</a>
+
+                        <a href="{% url 'student_delete' student.pk %}" 
+                           class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No students found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}
